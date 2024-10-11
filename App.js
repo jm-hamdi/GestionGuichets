@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import GuichetList from './components/GuichetList';
+import AddGuichet from './components/AddGuichet';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const App = () => {
+  const [guichets, setGuichets] = useState([]);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" options={{ title: 'Liste des Guichets' }}>
+          {props => <GuichetList {...props} guichets={guichets} setGuichets={setGuichets} />}
+        </Stack.Screen>
+        <Stack.Screen name="AddGuichet" options={{ title: 'Ajouter un Guichet' }}>
+          {props => <AddGuichet {...props} guichets={guichets} setGuichets={setGuichets} />}
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

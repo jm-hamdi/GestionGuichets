@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "icone": "star-outline",
+        "nom": "Guichet 1",
+        "role": "Rôle 1",
+        "statut": "actif",
+        "favori": false
+    },
+    {
+        "id": 2,
+        "icone": "star-outline",
+        "nom": "Guichet 2",
+        "role": "Rôle 2",
+        "statut": "inactif",
+        "favori": false
+    }
+]
