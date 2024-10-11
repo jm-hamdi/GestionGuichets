@@ -1,77 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Button, TextInput, FlatList, TouchableOpacity } from 'react-native';
-import * as FileSystem from 'expo-file-system'; // to handle the file system
+import React from 'react';
+import { View, Text, FlatList, Button, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-const GuichetList = ({ navigation, guichets, setGuichets }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-
-  // Charger les guichets depuis le fichier JSON
-  useEffect(() => {
-    const loadGuichets = async () => {
-      try {
-        const fileUri = `${FileSystem.documentDirectory}guichet.json`;
-        const fileInfo = await FileSystem.getInfoAsync(fileUri);
-
-        if (fileInfo.exists) {
-          const fileContent = await FileSystem.readAsStringAsync(fileUri);
-          setGuichets(JSON.parse(fileContent));
-        }
-      } catch (error) {
-        console.error('Erreur lors du chargement des guichets', error);
-      }
-    };
-
-    loadGuichets();
-  }, []);
-
-  // Filtrer les guichets en fonction de la recherche
-  const filteredGuichets = guichets.filter(guichet =>
-    guichet.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
+const GuichetList = ({ guichets, toggleFavorite, deleteGuichet }) => {
   return (
-    <View style={{ padding: 20 }}>
-      <Text style={{ fontSize: 18 }}>Guichets : {guichets.length}</Text>
+    <FlatList
+      data={guichets}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={({ item }) => (
+        <View style={styles.guichetItem}>
+          <Image source={{ uri: item.icon }} style={styles.icon} />
+          <View style={styles.details}>
+            <Text>{item.name}</Text>
 
-      {/* Affichage des favoris */}
-      <Text style={{ fontSize: 18, marginTop: 10 }}>Mes favoris :</Text>
-      <FlatList
-        data={guichets.filter(guichet => guichet.favorite)}
-        renderItem={({ item }) => (
-          <Text style={{ color: 'gold', paddingVertical: 5 }}>{item.name}</Text>
-        )}
-        keyExtractor={item => item.id}
-      />
 
-      <Button title="Nouveau Guichet" onPress={() => navigation.navigate('AddGuichet')} />
+            <View style={styles.imageContainer}>
+          <Image source={{ uri: item.icon }} style={styles.icon} />
+          <Text style={styles.roleText}>{item.role}</Text>
+        </View>
 
-      {/* Barre de recherche */}
-      <TextInput
-        style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1,
-          marginTop: 20,
-          marginBottom: 10,
-          paddingHorizontal: 10,
-        }}
-        placeholder="Rechercher un guichet"
-        value={searchQuery}
-        onChangeText={setSearchQuery}
-      />
 
-      {/* Liste des guichets */}
-      <FlatList
-        data={filteredGuichets}
-        renderItem={({ item }) => (
-          <TouchableOpacity>
-            <Text style={{ paddingVertical: 10 }}>{item.name}</Text>
+            <Text>{item.status}</Text>
+
+            
+          </View>
+          <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
+            <Text style={[styles.favorite, item.favorite ? styles.favActive : styles.favInactive]}>★</Text>
           </TouchableOpacity>
-        )}
-        keyExtractor={item => item.id}
-      />
-    </View>
+          <Button title="Supprimer" onPress={() => deleteGuichet(item.id)} />
+        </View>
+      )}
+    />
   );
 };
+
+const styles = StyleSheet.create({
+  guichetItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 8,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: '#ddd',
+  },
+  icon: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
+  },
+  details: {
+    flex: 1,
+  },
+  favorite: {
+    fontSize: 24,
+  },
+  favActive: {
+    color: 'yellow',
+  },
+  favInactive: {
+    color: 'gray',
+  },
+});
 
 export default GuichetList;
