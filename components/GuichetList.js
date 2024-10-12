@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   roleText: {
-    // fontWeight: 'bold',
     marginTop: 5, // Add space between image and text
     color: 'gray',
   },
@@ -99,14 +98,12 @@ const styles = StyleSheet.create({
   favInactive: {
     color: '#F1F3F1',
     shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.2,
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
     shadowRadius: 2,
     elevation: 2, // For Android shadow
-    
-
   },
   guichetItem: {
     flexDirection: 'row',
