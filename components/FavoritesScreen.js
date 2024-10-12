@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const FavoritesScreen = ({ favorites, toggleFavorite, deleteFavorite }) => {
+const FavoritesScreen = ({ favorites, toggleFavorite }) => {
   const [menuVisible, setMenuVisible] = useState(null); // State to track which menu is open
 
-  const handleDelete = (id) => {
+  const handleRemoveFavorite = (id) => {
     Alert.alert(
-      'Supprimer',
-      'Êtes-vous sûr de vouloir supprimer ce favori ?',
+      'Retirer des favoris',
+      'Êtes-vous sûr de vouloir retirer cet élément de vos favoris ?',
       [
         { text: 'Annuler', style: 'cancel' },
-        { text: 'Supprimer', onPress: () => deleteFavorite(id) },
+        { text: 'Retirer', onPress: () => toggleFavorite(id) },
       ],
       { cancelable: true }
     );
@@ -30,9 +30,9 @@ const FavoritesScreen = ({ favorites, toggleFavorite, deleteFavorite }) => {
               {/* Favorite Star Button */}
               <TouchableOpacity
                 style={styles.favoriteButton}
-                onPress={() => toggleFavorite(item.id)} // Toggle favorite status when clicked
+                onPress={() => handleRemoveFavorite(item.id)} // Remove item from favorites
               >
-                <Text style={[styles.favorite, item.isFavorite ? styles.favActive : styles.favInactive]}>★</Text>
+                <Text style={[styles.favorite, styles.favActive]}>★</Text>
               </TouchableOpacity>
               
               {/* Centered Image and Role Text */}
@@ -51,8 +51,8 @@ const FavoritesScreen = ({ favorites, toggleFavorite, deleteFavorite }) => {
 
               {menuVisible === item.id && (
                 <View style={styles.dropdownMenu}>
-                  <TouchableOpacity onPress={() => handleDelete(item.id)} style={styles.menuItem}>
-                    <Text>Supprimer</Text>
+                  <TouchableOpacity onPress={() => handleRemoveFavorite(item.id)} style={styles.menuItem}>
+                    <Text>Retirer</Text>
                   </TouchableOpacity>
                 </View>
               )}
@@ -109,17 +109,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
   },
   favActive: {
-    color: 'yellow', // Yellow star when favorite
-  },
-  favInactive: {
-    color: '#F1F3F1', // Grey star when not favorite
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 2, // For Android shadow
+    color: 'yellow', // Yellow color for active favorite
   },
   centerContainer: {
     flex: 1,

@@ -77,6 +77,7 @@ export default function App() {
             <FavoritesScreen 
               {...props} 
               favorites={favorites} 
+              toggleFavorite={toggleFavorite} // Pass toggleFavorite function
               setFavorites={setFavorites} 
             />
           )}
