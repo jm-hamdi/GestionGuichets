@@ -1,3 +1,4 @@
+// GuichetList.js
 import React from 'react';
 import { View, Text, FlatList, Button, Image, TouchableOpacity, StyleSheet } from 'react-native';
 

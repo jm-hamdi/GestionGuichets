@@ -1,11 +1,11 @@
+// MainScreen.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import GuichetList from './GuichetList';
 
-const MainScreen = ({ guichets = [], navigation }) => { // Default guichets to an empty array
+const MainScreen = ({ guichets = [], navigation, toggleFavorite, deleteGuichet }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Filter guichets based on search query
   const filteredGuichets = guichets.filter(guichet =>
     guichet?.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -26,7 +26,11 @@ const MainScreen = ({ guichets = [], navigation }) => { // Default guichets to a
         onChangeText={setSearchQuery}
       />
 
-      <GuichetList guichets={filteredGuichets} />
+      <GuichetList 
+        guichets={filteredGuichets} 
+        toggleFavorite={toggleFavorite} // Pass down the toggleFavorite function
+        deleteGuichet={deleteGuichet} // Pass down the deleteGuichet function
+      />
     </View>
   );
 };

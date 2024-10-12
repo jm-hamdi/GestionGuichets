@@ -12,6 +12,33 @@ export default function App() {
   const [guichets, setGuichets] = useState(guichetsData); // Initialize with imported data
   const [favorites, setFavorites] = useState([]); // Initialize favorites
 
+  // Function to toggle favorites
+  const toggleFavorite = (id) => {
+    setGuichets((prevGuichets) =>
+      prevGuichets.map((guichet) => {
+        if (guichet.id === id) {
+          const isFavorited = favorites.some((fav) => fav.id === id);
+          if (isFavorited) {
+            // Remove from favorites
+            setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.id !== id));
+          } else {
+            // Add to favorites
+            setFavorites((prevFavorites) => [...prevFavorites, guichet]);
+          }
+          return { ...guichet, favorite: !isFavorited }; // Toggle favorite status
+        }
+        return guichet;
+      })
+    );
+  };
+
+  // Function to delete guichet
+  const deleteGuichet = (id) => {
+    setGuichets((prevGuichets) => prevGuichets.filter((guichet) => guichet.id !== id));
+    // Also remove from favorites if it's deleted
+    setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.id !== id));
+  };
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="MainScreen">
@@ -24,7 +51,9 @@ export default function App() {
               {...props} 
               guichets={guichets} 
               favorites={favorites} 
-              setFavorites={setFavorites} // Pass down the function to set favorites
+              setFavorites={setFavorites} 
+              toggleFavorite={toggleFavorite} // Pass toggleFavorite function
+              deleteGuichet={deleteGuichet} // Pass deleteGuichet function
             />
           )}
         </Stack.Screen>
@@ -36,7 +65,7 @@ export default function App() {
             <AddGuichet 
               {...props} 
               setGuichets={setGuichets} 
-              setFavorites={setFavorites} // Pass down the function to set favorites
+              setFavorites={setFavorites} 
             />
           )}
         </Stack.Screen>
@@ -47,8 +76,8 @@ export default function App() {
           {props => (
             <FavoritesScreen 
               {...props} 
-              favorites={favorites} // Pass down the favorites
-              setFavorites={setFavorites} // Optional: If you want to modify favorites here
+              favorites={favorites} 
+              setFavorites={setFavorites} 
             />
           )}
         </Stack.Screen>
