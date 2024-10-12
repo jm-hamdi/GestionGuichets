@@ -62,11 +62,11 @@ const MainScreen = ({ guichets = [], navigation, toggleFavorite, deleteGuichet }
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#f5f5f5', // Light background
-  },
+    container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: '#fff',
+      },
   rowContainer: {
     flexDirection: 'row', // Aligns items in the same row
     justifyContent: 'space-between', // Evenly space them in the row

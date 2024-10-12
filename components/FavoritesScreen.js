@@ -19,7 +19,7 @@ const FavoritesScreen = ({ favorites, toggleFavorite }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Mes Favoris</Text>
+      {/* <Text style={styles.title}>Mes Favoris</Text> */}
       <FlatList
         data={favorites}
         keyExtractor={(item) => item.id.toString()}
@@ -71,11 +71,11 @@ const FavoritesScreen = ({ favorites, toggleFavorite }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#f5f5f5', // Light background
-  },
+    container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: '#fff',
+      },
   title: {
     fontSize: 24,
     fontWeight: 'bold',

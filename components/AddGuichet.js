@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { FontAwesome } from '@expo/vector-icons'; // Importing the FontAwesome icon set
 
 const AddGuichet = ({ setGuichets, navigation }) => {
   const [guichetName, setGuichetName] = useState('');
@@ -17,7 +18,7 @@ const AddGuichet = ({ setGuichets, navigation }) => {
     });
 
     if (!result.canceled) {
-      setImageUri(result.assets[0].uri); // Use the URI from the assets array
+      setImageUri(result.assets[0].uri); // Set the selected image URI
     }
   };
 
@@ -36,15 +37,27 @@ const AddGuichet = ({ setGuichets, navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Créez un nouveau guichet</Text>
-      
+      <Text style={styles.subtitle}>
+        Veuillez saisir les informations de votre organisation pour la créer
+      </Text>
+
       <TouchableOpacity onPress={pickImage} style={styles.imageContainer}>
-        {imageUri ? (
-          <Image source={{ uri: imageUri }} style={styles.image} />
-        ) : (
-          <View style={styles.placeholder}>
-            <Text style={styles.imageText}>Importer une image</Text>
+        <View style={styles.imageRow}>
+          {imageUri ? (
+            <Image source={{ uri: imageUri }} style={styles.image} />
+          ) : (
+            <View style={styles.placeholder}>
+              {/* Replace text with an icon */}
+              <FontAwesome name="file-image-o" size={40} color="#999" />
+            </View>
+          )}
+
+          <View style={styles.textContainer}>
+            <Text style={styles.infoText}>Formats autorisés: <Text style={styles.infoTextblue}>.png et .svg</Text></Text>
+            <Text style={styles.infoText}>Taille maximale autorisée: <Text style={styles.infoTextblue}>2 Mo</Text></Text>
+            <Text style={styles.infoText}>Dimensions idéales de l’image: <Text style={styles.infoTextblue}>100px * 100px</Text></Text>
           </View>
-        )}
+        </View>
       </TouchableOpacity>
 
       <TextInput
@@ -73,7 +86,7 @@ const AddGuichet = ({ setGuichets, navigation }) => {
   );
 };
 
-// Same styles as before but updated the image styles
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -87,8 +100,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   imageContainer: {
-    alignItems: 'center',
     marginBottom: 20,
+  },
+  infoTextblue: {
+    color: 'blue',
+  },
+  imageRow: {
+    flexDirection: 'row', // Align children in a row
+    alignItems: 'center', // Center the items vertically
   },
   image: {
     width: 100,
@@ -96,6 +115,13 @@ const styles = StyleSheet.create({
     borderRadius: 50, // Make the image circular
     borderWidth: 1,
     borderColor: '#ccc',
+    marginRight: 10, // Space between the image and the text
+  },
+  subtitle: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 20,
+    textAlign: 'center',
   },
   placeholder: {
     width: 100,
@@ -106,9 +132,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: '#ccc',
+    marginRight: 10, // Space between the placeholder and the text
   },
   imageText: {
     color: '#999',
+  },
+  infoText: {
+    textAlign: 'left', // Align text to the left
+    fontSize: 11,
+    color: '#666',
+    marginBottom: 8, // Add space between the text
+  },
+  textContainer: {
+    flex: 1, // Take the remaining space for the text
   },
   input: {
     height: 50,
