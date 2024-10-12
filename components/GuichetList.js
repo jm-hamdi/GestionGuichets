@@ -10,18 +10,8 @@ const GuichetList = ({ guichets, toggleFavorite, deleteGuichet }) => {
         <View style={styles.guichetItem}>
           <Image source={{ uri: item.icon }} style={styles.icon} />
           <View style={styles.details}>
-            <Text>{item.name}</Text>
-
-
-            <View style={styles.imageContainer}>
-          <Image source={{ uri: item.icon }} style={styles.icon} />
-          <Text style={styles.roleText}>{item.role}</Text>
-        </View>
-
-
+            <Text style={styles.roleText}>{item.role}</Text>
             <Text>{item.status}</Text>
-
-            
           </View>
           <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
             <Text style={[styles.favorite, item.favorite ? styles.favActive : styles.favInactive]}>★</Text>
@@ -49,6 +39,9 @@ const styles = StyleSheet.create({
   },
   details: {
     flex: 1,
+  },
+  roleText: {
+    fontWeight: 'bold',
   },
   favorite: {
     fontSize: 24,

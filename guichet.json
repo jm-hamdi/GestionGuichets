@@ -1,18 +1,19 @@
 [
     {
-        "id": 1,
-        "icone": "star-outline",
-        "nom": "Guichet 1",
-        "role": "Rôle 1",
-        "statut": "actif",
-        "favori": false
+      "id": 1,
+      "name": "Guichet 1",
+      "role": "Role 1",
+      "status": "Statut 1",
+      "icon": "https://example.com/icon1.png",
+      "favorite": false
     },
     {
-        "id": 2,
-        "icone": "star-outline",
-        "nom": "Guichet 2",
-        "role": "Rôle 2",
-        "statut": "inactif",
-        "favori": false
+      "id": 2,
+      "name": "Guichet 2",
+      "role": "Role 2",
+      "status": "Statut 2",
+      "icon": "https://example.com/icon2.png",
+      "favorite": false
     }
-]
+  ]
+  
