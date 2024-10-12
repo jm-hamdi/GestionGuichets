@@ -22,33 +22,43 @@ const GuichetList = ({ guichets, toggleFavorite, deleteGuichet }) => {
       data={guichets}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
-        <View style={styles.guichetItem}>
-          <TouchableOpacity
-            style={styles.favoriteButton}
-            onPress={() => toggleFavorite(item.id)}
-          >
-            <Text style={[styles.favorite, item.favorite ? styles.favActive : styles.favInactive]}>★</Text>
-          </TouchableOpacity>
-          <Image source={{ uri: item.icon }} style={styles.icon} />
-          <View style={styles.details}>
-            <Text style={styles.roleText}>{item.role}</Text>
-            <Text>{item.status}</Text>
-          </View>
-          <TouchableOpacity
-            onPress={() => setMenuVisible(menuVisible === item.id ? null : item.id)} // Toggle the menu
-            style={styles.menuButton}
-          >
-            <Icon name="more-vert" size={24} color="#000" />
-          </TouchableOpacity>
-
-          {/* Dropdown Menu */}
-          {menuVisible === item.id && (
-            <View style={styles.dropdownMenu}>
-              <TouchableOpacity onPress={() => handleDelete(item.id)} style={styles.menuItem}>
-                <Text>Supprimer</Text>
-              </TouchableOpacity>
+        <View>
+          <View style={styles.guichetItem}>
+            <TouchableOpacity
+              style={styles.favoriteButton}
+              onPress={() => toggleFavorite(item.id)}
+            >
+              <Text style={[styles.favorite, item.favorite ? styles.favActive : styles.favInactive]}>★</Text>
+            </TouchableOpacity>
+            
+            {/* Centered Image and Role Text */}
+            <View style={styles.centerContainer}>
+              <Image source={{ uri: item.icon }} style={styles.icon} />
+              <Text style={styles.roleText}>{item.role}</Text>
             </View>
-          )}
+
+            <TouchableOpacity
+              onPress={() => setMenuVisible(menuVisible === item.id ? null : item.id)} // Toggle the menu
+              style={styles.menuButton}
+            >
+              <Icon name="more-vert" size={24} color="#000" />
+            </TouchableOpacity>
+
+            {/* Dropdown Menu */}
+            {menuVisible === item.id && (
+              <View style={styles.dropdownMenu}>
+                <TouchableOpacity onPress={() => handleDelete(item.id)} style={styles.menuItem}>
+                  <Text>Supprimer</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
+
+          {/* Name and Status below the card */}
+          <View style={styles.textContainer}>
+            <Text style={styles.nameText}>{item.name}</Text>
+            <Text style={styles.statusText}>{item.status}</Text>
+          </View>
         </View>
       )}
     />
@@ -57,16 +67,23 @@ const GuichetList = ({ guichets, toggleFavorite, deleteGuichet }) => {
 
 const styles = StyleSheet.create({
   icon: {
-    width: 50,
-    height: 50,
-    borderRadius: 25, // Make the image circular
-    marginRight: 10,
+    width: 80,
+    height: 80,
+    borderRadius: 40, // Make the image circular
+  },
+  centerContainer: {
+    flex: 1,
+    alignItems: 'center', // Center horizontally
+    justifyContent: 'center', // Center vertically
+    marginVertical: 10, // Add vertical margin for spacing
   },
   details: {
     flex: 1,
   },
   roleText: {
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
+    marginTop: 5, // Add space between image and text
+    color: 'gray',
   },
   favoriteButton: {
     position: 'absolute',
@@ -74,13 +91,22 @@ const styles = StyleSheet.create({
     left: 10, // Changed from right to left
   },
   favorite: {
-    fontSize: 24,
+    fontSize: 26,
   },
   favActive: {
     color: 'yellow',
   },
   favInactive: {
-    color: 'gray',
+    color: '#F1F3F1',
+    shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 2, // For Android shadow
+    
+
   },
   guichetItem: {
     flexDirection: 'row',
@@ -101,7 +127,9 @@ const styles = StyleSheet.create({
     elevation: 2, // For Android shadow
   },
   menuButton: {
-    marginLeft: 10, // Add space between the details and the menu button
+    position: 'absolute',
+    right: 10, // Position the menu button to the right corner
+    top: 10,
   },
   dropdownMenu: {
     position: 'absolute',
@@ -117,6 +145,18 @@ const styles = StyleSheet.create({
   menuItem: {
     padding: 10,
     alignItems: 'center',
+  },
+  textContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between', // Distribute space between text elements
+    paddingHorizontal: 20, // Add horizontal padding
+    marginBottom: 10, // Margin below the text
+  },
+  nameText: {
+    fontWeight: 'bold',
+  },
+  statusText: {
+    color: 'gray', // Style for the status text
   },
 });
 
