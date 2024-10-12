@@ -17,7 +17,7 @@ const AddGuichet = ({ setGuichets, navigation }) => {
     });
 
     if (!result.canceled) {
-      setImageUri(result.uri);
+      setImageUri(result.assets[0].uri); // Use the URI from the assets array
     }
   };
 
@@ -73,6 +73,7 @@ const AddGuichet = ({ setGuichets, navigation }) => {
   );
 };
 
+// Same styles as before but updated the image styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
-    borderRadius: 50,
+    borderRadius: 50, // Make the image circular
     borderWidth: 1,
     borderColor: '#ccc',
   },

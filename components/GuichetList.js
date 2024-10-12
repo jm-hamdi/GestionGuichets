@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 50,
     height: 50,
+    borderRadius: 25, // Make the image circular
     marginRight: 10,
   },
   details: {
