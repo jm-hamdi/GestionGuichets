@@ -79,15 +79,15 @@ const styles = StyleSheet.create({
     marginRight: 5, // Add some space between the guichet count and the buttons
   },
   guichetLabelText: {
-    fontSize: 16,
+    fontSize: 15,
   },
   guichetCountBox: {
     borderWidth: 1,
     borderColor: '#ccc',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
     borderRadius: 8,
-    marginLeft: 5, // Space between label and number box
+    marginLeft: 4, // Space between label and number box
     backgroundColor: '#fff',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -98,14 +98,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#DEEFFA',
   },
   guichetCountText: {
-    fontSize: 16,
+    fontSize: 15,
     color: 'blue', // Blue text for the count
   },
   favoriteButton: {
     borderWidth: 2,
     borderColor: 'green', // Green border for the circular button
-    paddingVertical: 10,
-    paddingHorizontal: 14,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
     borderRadius: 50, // Make it circular
     backgroundColor: '#fff', // White background for the favorite button
     shadowColor: '#000',

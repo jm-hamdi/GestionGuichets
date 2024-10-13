@@ -19,7 +19,6 @@ const FavoritesScreen = ({ favorites, toggleFavorite }) => {
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.title}>Mes Favoris</Text> */}
       <FlatList
         data={favorites}
         keyExtractor={(item) => item.id.toString()}
@@ -52,7 +51,7 @@ const FavoritesScreen = ({ favorites, toggleFavorite }) => {
               {menuVisible === item.id && (
                 <View style={styles.dropdownMenu}>
                   <TouchableOpacity onPress={() => handleRemoveFavorite(item.id)} style={styles.menuItem}>
-                    <Text>Retirer</Text>
+                    <Text>Supprimer</Text>
                   </TouchableOpacity>
                 </View>
               )}
@@ -71,26 +70,20 @@ const FavoritesScreen = ({ favorites, toggleFavorite }) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#fff',
-      },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    textAlign: 'center', // Center the title
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
   },
   favoriteItem: {
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 8,
     padding: 20, // Adjusted padding for layout balance
-    borderWidth: 1,
-    borderColor: '#ddd',
+    borderWidth: 0.3,
+    borderColor: '#6c6c6c',
     borderRadius: 12, // Rounded corners
-    backgroundColor: '#f8f8f8', // Light background for items
+    backgroundColor: '#fafafa', // Light background for items
     shadowColor: '#000', // Shadow for elevation
     shadowOffset: {
       width: 0,
@@ -109,7 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
   },
   favActive: {
-    color: 'yellow', // Yellow color for active favorite
+    color: '#ecec09', // Active favorite color
   },
   centerContainer: {
     flex: 1,
@@ -134,16 +127,24 @@ const styles = StyleSheet.create({
   dropdownMenu: {
     position: 'absolute',
     right: 0,
-    top: '100%', // Position the dropdown below the favorite item
+    top: 40, // Position the dropdown below the favorite item
     backgroundColor: '#fff',
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 8,
     elevation: 5, // Shadow for the dropdown
     zIndex: 1, // Ensure the dropdown is above other elements
+    shadowColor: '#000', // Shadow for elevation
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 2,
   },
   menuItem: {
-    padding: 10,
+    padding: 13,
     alignItems: 'center',
   },
   textContainer: {

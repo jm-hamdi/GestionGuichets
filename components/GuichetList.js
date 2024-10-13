@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, Button, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const GuichetList = ({ guichets, toggleFavorite, deleteGuichet }) => {
@@ -93,7 +93,14 @@ const styles = StyleSheet.create({
     fontSize: 26,
   },
   favActive: {
-    color: 'yellow',
+    color: '#ecec09',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 2,
   },
   favInactive: {
     color: '#F1F3F1',
@@ -110,10 +117,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 8,
     padding: 20, // Adjusted padding for layout balance
-    borderWidth: 1,
-    borderColor: '#ddd',
+    borderWidth: 0.3,
+    borderColor: '#6c6c6c',
     borderRadius: 12, // Rounded corners
-    backgroundColor: '#f8f8f8', // Light background for items
+    backgroundColor: '#fafafa', // Light background for items
     shadowColor: '#000', // Shadow for elevation
     shadowOffset: {
       width: 0,
@@ -131,17 +138,26 @@ const styles = StyleSheet.create({
   dropdownMenu: {
     position: 'absolute',
     right: 0,
-    top: '100%', // Position the dropdown below the guichet item
+    top: 40, // Position the dropdown below the guichet item
     backgroundColor: '#fff',
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 8,
     elevation: 5, // Shadow for the dropdown
     zIndex: 1, // Ensure the dropdown is above other elements
+    shadowColor: '#000', // Shadow for elevation
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 2,
   },
   menuItem: {
-    padding: 10,
+    padding: 13,
     alignItems: 'center',
+   
   },
   textContainer: {
     flexDirection: 'row',
