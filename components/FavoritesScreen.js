@@ -80,18 +80,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 8,
     padding: 20, // Adjusted padding for layout balance
-    borderWidth: 0.3,
-    borderColor: '#6c6c6c',
+    borderWidth: 0.5,
+    marginHorizontal: 18,
+
+    borderColor: '#9E9E9E',
     borderRadius: 12, // Rounded corners
-    backgroundColor: '#fafafa', // Light background for items
+    backgroundColor: '#ffffff', // Light background for items
     shadowColor: '#000', // Shadow for elevation
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 3,
     },
     shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 2, // For Android shadow
+    shadowRadius: 6,
+    elevation: 4, // Increased elevation for overall card
   },
   favoriteButton: {
     position: 'absolute',
@@ -154,7 +156,8 @@ const styles = StyleSheet.create({
     marginBottom: 10, // Margin below the text
   },
   nameText: {
-    fontWeight: 'bold',
+    color: 'gray',
+    fontSize: 16, // Increased font size for the name
   },
   statusText: {
     color: 'gray', // Style for the status text
