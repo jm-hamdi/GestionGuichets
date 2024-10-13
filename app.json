@@ -20,7 +20,10 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.jawadmh.GestionGuichets"
+      "package": "com.jawadmh.GestionGuichets",
+      "enableGradleDaemons": true,
+      "bundleInRelease": true,
+      "javascriptEngine": "jsc"
     },
     "web": {
       "favicon": "./assets/favicon.png"
